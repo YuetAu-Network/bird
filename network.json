@@ -1,0 +1,127 @@
+{
+  "global": {
+    "clearnet": {
+      "asn": "138435",
+      "routes": {
+        "v4": {"10.92.5.0/24": false},
+        "v6": {"2602:feda:d70::/48": false, "2a0e:46c4:2900::/48": false}
+      }
+    }
+  },
+  "zones": {
+    "CN": {
+      "clearnet": {
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      }
+    },
+    "HK": {
+      "clearnet": {
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      }
+    },
+    "AP": {
+      "clearnet": {
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      }
+    },
+    "EU": {
+      "clearnet": {
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      }
+    },
+    "US": {
+      "clearnet": {
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      }
+    }
+  },
+  "nodes": {
+    "hkg": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.1", "10.92.5.254"],
+          "v6": ["2602:feda:d70::1", "2602:feda:d70::ffff"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["AP", "HK", "CN"],
+      "direct": ["fra"]
+    },
+    "sin": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.2", "10.92.5.254"],
+          "v6": ["2602:feda:d70::2", "2602:feda:d70::ffff"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["AP"],
+      "direct": ["fra"]
+    },
+    "fra": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.3"],
+          "v6": ["2602:feda:d70::3"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["EU"],
+      "direct": ["hkg", "sin"]
+    },
+    "csx": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.5"],
+          "v6": ["2602:feda:d70::5"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["CN"],
+      "direct": []
+    },
+    "hkg2": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.6"],
+          "v6": ["2602:feda:d70::6"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["HK"],
+      "direct": [],
+      "slim": true
+    }
+  },
+  "mts_exceptions": []
+}
