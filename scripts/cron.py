@@ -57,12 +57,12 @@ def update_configs():
         update_assignment()
     if not os.path.exists("/etc/bird.conf"):
         os.symlink("/etc/bird/bird.conf", "/etc/bird.conf")
-    if not os.path.exists("/etc/bird/clearnet"):
+    if not os.path.exists("/etc/bird/clearnet/peers"):
         os.mkdir("/etc/bird/clearnet")
         os.mkdir("/etc/bird/clearnet/peers")
     if not os.path.exists("/etc/bird/dn42/peers"):
         os.mkdir("/etc/bird/dn42/peers")
-    if not os.path.exists("/etc/bird/ibgp"):
+    if not os.path.exists("/etc/bird/ibgp/peers"):
         os.mkdir("/etc/bird/ibgp")
         os.mkdir("/etc/bird/ibgp/peers")
     return True
