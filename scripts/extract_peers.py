@@ -9,7 +9,7 @@ wg_path = "/etc/wireguard/auto/"
 
 config = []
 wg_privkeyfile = open("/etc/wireguard/privatekey")
-config["wg_privkey"] = wg_privkeyfile.read()
+config.append({"key": wg_privkeyfile.read()})
 
 for bgp_filename in bgp_dir_list:
     conn_name = bgp_filename.split(".")[0]
