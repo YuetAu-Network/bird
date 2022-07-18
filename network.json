@@ -4,7 +4,7 @@
       "asn": "138435",
       "routes": {
         "v4": {},
-        "v6": {"2602:feda:d70::/48": "nm-YuetAuNet", "2a0e:46c4:2900::/48": "nm-YuetAuNet"}
+        "v6": {"2602:feda:d70::/48": false, "2a0e:46c4:2900::/48": false}
       }
     },
     "dn42": {
