@@ -183,10 +183,10 @@ def update_ibgp_peers(global_config):
         peer_file = peer_folder+peer+".conf"
         peer_conf = ""
 
-        if "slim" in global_config["nodes"][peer] and global_config["nodes"][peer]["slim"]:
-            peer_conf += "protocol bgp IBGP_%s from IBGP_DEFROUTE_PEER {\n"%peer.upper()
-        else:
+        if "slim" not in global_config["nodes"][peer]:
             peer_conf += "protocol bgp IBGP_%s from IBGP_PEER {\n"%peer.upper()
+        else:
+            peer_conf += "protocol bgp IBGP_%s from IBGP_DEFROUTE_PEER {\n"%peer.upper()
         peer_conf += "    neighbor %s external;\n"%ipv6
         peer_conf += "}"
 
