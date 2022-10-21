@@ -142,7 +142,7 @@ def update_assignment():
 
     #RPKI
     if "slim" not in global_config["nodes"][NODE]:
-        conf += "roa4 table NET_RPKI;\nroa6 table NET_RPKIv6;"
+        conf += "roa4 table NET_RPKI;\nroa6 table NET_RPKIv6;\n"
         conf += "protocol rpki RPKI_CloudFlare {\n  #roa4 { table NET_RPKI; };\n  roa6 { table NET_RPKIv6; };\n  remote \"10.92.5.254\" port 8282;\n}\n"
         conf += "function RPKI_INVALID() {\n  case net.type {\n    NET_IP4: return true;#NET_IP4: return roa_check(NET_RPKI, net, bgp_path.last_nonaggregated) = ROA_INVALID;\n    NET_IP6: return roa_check(NET_RPKIv6, net, bgp_path.last_nonaggregated) = ROA_INVALID;\n  }\n}\n"
     else:
@@ -184,9 +184,9 @@ def update_ibgp_peers(global_config):
         peer_conf = ""
 
         if "slim" in global_config["nodes"][peer] and global_config["nodes"][peer]["slim"]:
-            peer_conf += "protocol bgp IBGP_%s from IBGP_PEER {\n"%peer.upper()
-        else:
             peer_conf += "protocol bgp IBGP_%s from IBGP_DEFROUTE_PEER {\n"%peer.upper()
+        else:
+            peer_conf += "protocol bgp IBGP_%s from IBGP_PEER {\n"%peer.upper()
         peer_conf += "    neighbor %s external;\n"%ipv6
         peer_conf += "}"
 
