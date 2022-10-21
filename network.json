@@ -17,14 +17,6 @@
         }
       }
     },
-    "HK": {
-      "clearnet": {
-        "routes": {
-          "v4": {},
-          "v6": {}
-        }
-      }
-    },
     "AP": {
       "clearnet": {
         "routes": {
@@ -62,7 +54,7 @@
           "v6": {}
         }
       },
-      "zone": ["AP", "HK", "CN"],
+      "zone": ["AP", "CN"],
       "direct": ["fra"]
     },
     "sin": {
@@ -118,9 +110,8 @@
           "v6": {}
         }
       },
-      "zone": ["HK"],
-      "direct": [],
-      "slim": true
+      "zone": ["AP"],
+      "direct": []
     }
   },
   "mts_exceptions": []
