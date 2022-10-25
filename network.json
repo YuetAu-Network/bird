@@ -125,7 +125,7 @@
         }
       },
       "zone": ["AP"],
-      "direct": [],
+      "direct": []
     }
   },
   "mts_exceptions": []
