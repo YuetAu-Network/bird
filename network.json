@@ -112,6 +112,20 @@
       },
       "zone": ["AP"],
       "direct": []
+    },
+    "ust": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.7"],
+          "v6": ["2602:feda:d70::7"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["AP"],
+      "direct": [],
     }
   },
   "mts_exceptions": []
