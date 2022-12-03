@@ -71,7 +71,7 @@
       "zone": ["AP"],
       "direct": ["fra"]
     },
-    "fra": {
+    "sea": {
       "clearnet": {
         "ip": {
           "v4": ["10.92.5.3"],
@@ -82,8 +82,8 @@
           "v6": {}
         }
       },
-      "zone": ["EU"],
-      "direct": ["hkg", "sin"]
+      "zone": ["US"],
+      "direct": ["hkg", "sin", "tpe"]
     },
     "csx": {
       "clearnet": {
@@ -118,6 +118,20 @@
         "ip": {
           "v4": ["10.92.5.7"],
           "v6": ["2602:feda:d70::7"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["AP"],
+      "direct": []
+    },
+    "tpe": {
+      "clearnet": {
+        "ip": {
+          "v4": ["10.92.5.8"],
+          "v6": ["2602:feda:d70::8"]
         },
         "routes": {
           "v4": {},
