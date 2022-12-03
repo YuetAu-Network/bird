@@ -55,7 +55,7 @@
         }
       },
       "zone": ["AP", "CN"],
-      "direct": ["fra"]
+      "direct": ["sea"]
     },
     "sin": {
       "clearnet": {
@@ -69,7 +69,7 @@
         }
       },
       "zone": ["AP"],
-      "direct": ["fra"]
+      "direct": ["sea"]
     },
     "sea": {
       "clearnet": {
@@ -139,7 +139,7 @@
         }
       },
       "zone": ["AP"],
-      "direct": []
+      "direct": ["sea"]
     }
   },
   "mts_exceptions": []
