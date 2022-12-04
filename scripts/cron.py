@@ -284,11 +284,11 @@ def build_bridge(config, keys):
             try:
                 (ndb
                  .interfaces[link_name]
-                 .add_ip("fe80::925:"+pos+"/64")
+                 .add_ip("fe80::925:"+str(pos)+"/64")
                  .commit()
                 )
             except:
-                print(link_name + " unable create IPv6 " + net_ipv6)
+                print(link_name + " unable create IPv6 " + "fe80::925:"+str(pos)+"/64")
             print(link_name + " IPv6 Complete")
     ndb.close()
     return config
