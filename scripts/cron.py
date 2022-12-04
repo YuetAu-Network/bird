@@ -309,7 +309,7 @@ def update_ibgp_peers(global_config):
     peers = peers + global_config["nodes"][NODE]["direct"]
 
     for peer in peers:
-        ipv6 = "fe80::0925:"+str(global_config["nodes"][peer]["pos"])+"%"+global_config["nodes"][peer]["link_name"]
+        ipv6 = "fe80::0925:"+str(int(not global_config["nodes"][peer]["pos"]))+"%"+global_config["nodes"][peer]["link_name"]
         peer_file = peer_folder+peer+".conf"
         peer_conf = ""
 
