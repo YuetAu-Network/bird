@@ -94,8 +94,8 @@ def update_assignment():
 
     conf += "\n\n"
 
-    self_ipv4 = global_config["nodes"][NODE]["clearnet"]["ip"]["v4"]
-    self_ipv6 = global_config["nodes"][NODE]["clearnet"]["ip"]["v6"]
+    self_ipv4 = global_config["nodes"][NODE]["clearnet"]["ip"]["v4"] | global_config["nodes"][NODE]["clearnet"]["anycast_ip"]["v4"]
+    self_ipv6 = global_config["nodes"][NODE]["clearnet"]["ip"]["v6"] | global_config["nodes"][NODE]["clearnet"]["anycast_ip"]["v6"]
 
     conf += "define SELF_IPv4_LIST = "
     if len(self_ipv4) > 1:
@@ -184,13 +184,13 @@ def build_bridge(config, keys):
          .create(ifname="LINK_DUMMY", kind='dummy')
          .commit()
         )
-        for net_ipv4 in config["nodes"][NODE]["clearnet"]["ip"]["v4"]:
+        for net_ipv4 in config["nodes"][NODE]["clearnet"]["ip"]["v4"] | config["nodes"][NODE]["clearnet"]["anycast_ip"]["v4"]:
             (ndb
              .interfaces["LINK_DUMMY"]
              .add_ip(net_ipv4+"/32")
              .commit()
             )
-        for net_ipv6 in config["nodes"][NODE]["clearnet"]["ip"]["v6"]:
+        for net_ipv6 in config["nodes"][NODE]["clearnet"]["ip"]["v6"] | config["nodes"][NODE]["clearnet"]["anycast_ip"]["v6"]:
             (ndb
              .interfaces["LINK_DUMMY"]
              .add_ip(net_ipv6+"/128")
