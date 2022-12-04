@@ -153,46 +153,16 @@ def update_assignment():
     f.write(conf)
     f.close()
 
-    update_ibgp_peers(global_config)
-    update_hosts(global_config)
-
     key1 = (os.getenv("WG_A_PUBKEY"), os.getenv("WG_A_PRIVKEY"))
     key2 = (os.getenv("WG_B_PUBKEY"), os.getenv("WG_B_PRIVKEY"))
     build_bridge(global_config, [key1, key2])
+    
+    update_ibgp_peers(global_config)
+    update_hosts(global_config)
 
     os.system("birdc c")
 
     return True
-
-def update_ibgp_peers(global_config):
-    peer_folder = "/etc/bird/ibgp/peers/"
-
-    for file_name in os.listdir(peer_folder):
-        if file_name.endswith('.conf'):
-            os.remove(peer_folder + file_name)
-
-    peers = []
-    for tzone in global_config["nodes"][NODE]["zone"]:
-        for tnode in global_config["nodes"]:
-            if tnode != NODE and tzone in global_config["nodes"][tnode]["zone"]:
-                peers.append(tnode)
-    peers = peers + global_config["nodes"][NODE]["direct"]
-
-    for peer in peers:
-        ipv6 = global_config["nodes"][peer]["clearnet"]["ip"]["v6"][0]
-        peer_file = peer_folder+peer+".conf"
-        peer_conf = ""
-
-        if "slim" not in global_config["nodes"][peer]:
-            peer_conf += "protocol bgp IBGP_%s from IBGP_PEER {\n"%peer.upper()
-        else:
-            peer_conf += "protocol bgp IBGP_%s from IBGP_DEFROUTE_PEER {\n"%peer.upper()
-        peer_conf += "    neighbor %s external;\n"%ipv6
-        peer_conf += "}"
-
-        f = open(peer_file, "w")
-        f.write(peer_conf)
-        f.close()
 
 def build_bridge(config, keys):
     peers = config["nodes"][NODE]["direct"]
@@ -246,12 +216,22 @@ def build_bridge(config, keys):
                 pos = 1
                 link_name += peer.upper()+"_"+NODE.upper()
         else:
-            if NODE[0] < peer[0]:
+            if NODE[0] == peer[0]:
+              #Two Loc Code First Char same
+              if NODE[1] < peer[1]:
+                pos = 0
+                link_name += NODE.upper()+"_"+peer.upper()
+              else:
+                pos = 1
+                link_name += peer.upper()+"_"+NODE.upper()  
+            elif NODE[0] < peer[0]:
                 pos = 0
                 link_name += NODE.upper()+"_"+peer.upper()
             else:
                 pos = 1
                 link_name += peer.upper()+"_"+NODE.upper()
+        config["nodes"][peer]["pos"] = pos
+        config["nodes"][peer]["link_name"] = link_name
 
         if link_name not in links:
             wg = WireGuard()
@@ -301,28 +281,47 @@ def build_bridge(config, keys):
                     except:
                         print(link_name + " unable create IPv4 route " + net_ipv4)
             print(link_name + " IPv4 Complete")
-            for net_ipv6 in config["nodes"][NODE]["clearnet"]["ip"]["v6"]:
-                try:
-                    (ndb
-                     .interfaces[link_name]
-                     .add_ip(net_ipv6+"/128")
-                     .commit()
-                    )
-                except:
-                    print(link_name + " unable create IPv6 " + net_ipv6)
-                for peer_net_ipv6 in config["nodes"][peer]["clearnet"]["ip"]["v6"]:
-                    if net_ipv6 == peer_net_ipv6:
-                        pass
-                    try:
-                        (ndb
-                         .routes
-                         .create(dst=peer_net_ipv6+"/128", oif=link_index)
-                         .commit()
-                        )
-                    except:
-                        print(link_name + " unable create IPv6 route " + net_ipv6)
+            try:
+                (ndb
+                 .interfaces[link_name]
+                 .add_ip("fe80::925:"+pos+"/64")
+                 .commit()
+                )
+            except:
+                print(link_name + " unable create IPv6 " + net_ipv6)
             print(link_name + " IPv6 Complete")
     ndb.close()
+    
+
+def update_ibgp_peers(global_config):
+    peer_folder = "/etc/bird/ibgp/peers/"
+
+    for file_name in os.listdir(peer_folder):
+        if file_name.endswith('.conf'):
+            os.remove(peer_folder + file_name)
+
+    peers = []
+    for tzone in global_config["nodes"][NODE]["zone"]:
+        for tnode in global_config["nodes"]:
+            if tnode != NODE and tzone in global_config["nodes"][tnode]["zone"]:
+                peers.append(tnode)
+    peers = peers + global_config["nodes"][NODE]["direct"]
+
+    for peer in peers:
+        ipv6 = "fe80::925:"+config["nodes"][peer]["pos"]+"%LINK_"+config["nodes"][peer]["link_name"]
+        peer_file = peer_folder+peer+".conf"
+        peer_conf = ""
+
+        if "slim" not in global_config["nodes"][peer]:
+            peer_conf += "protocol bgp IBGP_%s from IBGP_PEER {\n"%peer.upper()
+        else:
+            peer_conf += "protocol bgp IBGP_%s from IBGP_DEFROUTE_PEER {\n"%peer.upper()
+        peer_conf += "    neighbor %s external;\n"%ipv6
+        peer_conf += "}"
+
+        f = open(peer_file, "w")
+        f.write(peer_conf)
+        f.close()
 
 def update_hosts(config):
     hosts = """
