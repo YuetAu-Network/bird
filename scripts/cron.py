@@ -155,7 +155,7 @@ def update_assignment():
 
     key1 = (os.getenv("WG_A_PUBKEY"), os.getenv("WG_A_PRIVKEY"))
     key2 = (os.getenv("WG_B_PUBKEY"), os.getenv("WG_B_PRIVKEY"))
-    build_bridge(global_config, [key1, key2])
+    global_config = build_bridge(global_config, [key1, key2])
     
     update_ibgp_peers(global_config)
     update_hosts(global_config)
@@ -291,6 +291,7 @@ def build_bridge(config, keys):
                 print(link_name + " unable create IPv6 " + net_ipv6)
             print(link_name + " IPv6 Complete")
     ndb.close()
+    return config
     
 
 def update_ibgp_peers(global_config):
