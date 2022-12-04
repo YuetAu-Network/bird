@@ -94,8 +94,8 @@ def update_assignment():
 
     conf += "\n\n"
 
-    self_ipv4 = global_config["nodes"][NODE]["clearnet"]["ip"]["v4"] | global_config["nodes"][NODE]["clearnet"]["anycast_ip"]["v4"]
-    self_ipv6 = global_config["nodes"][NODE]["clearnet"]["ip"]["v6"] | global_config["nodes"][NODE]["clearnet"]["anycast_ip"]["v6"]
+    self_ipv4 = global_config["nodes"][NODE]["clearnet"]["ip"]["v4"] + global_config["nodes"][NODE]["clearnet"]["anycast_ip"]["v4"]
+    self_ipv6 = global_config["nodes"][NODE]["clearnet"]["ip"]["v6"] + global_config["nodes"][NODE]["clearnet"]["anycast_ip"]["v6"]
 
     conf += "define SELF_IPv4_LIST = "
     if len(self_ipv4) > 1:
