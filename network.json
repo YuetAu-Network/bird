@@ -43,24 +43,6 @@
     }
   },
   "nodes": {
-    "hkg": {
-      "clearnet": {
-        "anycast_ip": {
-          "v4": [],
-          "v6": []
-        },
-        "ip": {
-          "v4": ["10.92.5.1"],
-          "v6": ["2a0e:46c4:2900::1"]
-        },
-        "routes": {
-          "v4": {},
-          "v6": {}
-        }
-      },
-      "zone": ["AP", "CN"],
-      "direct": ["sea"]
-    },
     "sin": {
       "clearnet": {
         "anycast_ip": {
@@ -76,26 +58,7 @@
           "v6": {}
         }
       },
-      "zone": ["AP"],
-      "direct": ["sea"]
-    },
-    "sea": {
-      "clearnet": {
-        "anycast_ip": {
-          "v4": ["10.92.5.254"],
-          "v6": ["2a0e:46c4:2900::ffff"]
-        },
-        "ip": {
-          "v4": ["10.92.5.3"],
-          "v6": ["2a0e:46c4:2900::3"]
-        },
-        "routes": {
-          "v4": {},
-          "v6": {}
-        }
-      },
-      "zone": ["US"],
-      "direct": ["hkg", "sin", "tpe"]
+      "zone": ["AP"]
     },
     "csx": {
       "clearnet": {
@@ -130,25 +93,7 @@
           "v6": {}
         }
       },
-      "zone": ["AP"],
-      "direct": []
-    },
-    "ust": {
-      "clearnet": {
-        "anycast_ip": {
-          "v4": [],
-          "v6": []
-        },
-        "ip": {
-          "v4": ["10.92.5.6"],
-          "v6": ["2a0e:46c4:2900::6"]
-        },
-        "routes": {
-          "v4": {},
-          "v6": {}
-        }
-      },
-      "zone": ["AP"],
+      "zone": ["AP", "CN"],
       "direct": []
     },
     "tpe": {
@@ -166,8 +111,7 @@
           "v6": {}
         }
       },
-      "zone": ["AP"],
-      "direct": ["sea"]
+      "zone": ["AP"]
     }
   },
   "mts_exceptions": []
