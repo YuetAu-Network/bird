@@ -243,7 +243,7 @@ def build_bridge(config, keys):
             print(link_name + " Link Created")
             try:
                 peer_connect_point = resolve(peer+".yuetau.net")[0]
-            except NameLookupError:
+            except:
                 peer_connect_point = "127.0.0.1"
             print(link_name + " Resolved to " + peer_connect_point)
             wg_peer = {
