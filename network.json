@@ -58,7 +58,8 @@
           "v6": {}
         }
       },
-      "zone": ["AP"]
+      "zone": ["AP"],
+      "direct": []
     },
     "csx": {
       "clearnet": {
@@ -111,7 +112,8 @@
           "v6": {}
         }
       },
-      "zone": ["AP"]
+      "zone": ["AP"],
+      "direct": []
     }
   },
   "mts_exceptions": []
