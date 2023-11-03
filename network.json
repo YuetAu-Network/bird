@@ -59,7 +59,7 @@
         }
       },
       "zone": ["AP"],
-      "direct": []
+      "direct": ["lon"]
     },
     "csx": {
       "clearnet": {
@@ -131,7 +131,7 @@
         }
       },
       "zone": ["EU"],
-      "direct": []
+      "direct": ["sin"]
     }
   },
   "mts_exceptions": []
