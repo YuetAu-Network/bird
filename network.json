@@ -114,6 +114,24 @@
       },
       "zone": ["AP"],
       "direct": []
+    },
+    "lon": {
+      "clearnet": {
+        "anycast_ip": {
+          "v4": [],
+          "v6": []
+        },
+        "ip": {
+          "v4": ["10.92.5.8"],
+          "v6": ["2a0e:46c4:2900::8"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["EU"],
+      "direct": []
     }
   },
   "mts_exceptions": []
