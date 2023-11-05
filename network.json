@@ -59,7 +59,7 @@
         }
       },
       "zone": ["AP"],
-      "direct": ["lon"]
+      "direct": ["lon", "sjc"]
     },
     "csx": {
       "clearnet": {
@@ -131,7 +131,25 @@
         }
       },
       "zone": ["EU"],
-      "direct": ["sin"]
+      "direct": ["sin", "sjc"]
+    },
+    "sjc": {
+      "clearnet": {
+        "anycast_ip": {
+          "v4": [],
+          "v6": []
+        },
+        "ip": {
+          "v4": ["10.92.5.9"],
+          "v6": ["2a0e:46c4:2900::9"]
+        },
+        "routes": {
+          "v4": {},
+          "v6": {}
+        }
+      },
+      "zone": ["US"],
+      "direct": ["sin", "lon"]
     }
   },
   "mts_exceptions": []
