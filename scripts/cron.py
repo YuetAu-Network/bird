@@ -153,9 +153,9 @@ def update_assignment():
     f.write(conf)
     f.close()
 
-    key1 = (os.getenv("WG_A_PUBKEY"), os.getenv("WG_A_PRIVKEY"))
-    key2 = (os.getenv("WG_B_PUBKEY"), os.getenv("WG_B_PRIVKEY"))
-    global_config = build_bridge(global_config, [key1, key2])
+    #key1 = (os.getenv("WG_A_PUBKEY"), os.getenv("WG_A_PRIVKEY"))
+    #key2 = (os.getenv("WG_B_PUBKEY"), os.getenv("WG_B_PRIVKEY"))
+    #global_config = build_bridge(global_config, [key1, key2])
     
     update_ibgp_peers(global_config)
     update_hosts(global_config)
